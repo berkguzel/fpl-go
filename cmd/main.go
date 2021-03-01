@@ -1,35 +1,18 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
-	"io/ioutil"
-	"time"
+	"github.com/berkguzel/fpl-go/fpl"
 )
-
 func main(){
 
-	req, err := http.NewRequest("GET", "https://fantasy.premierleague.com/api/fixtures/", nil)
-	if err != nil{
-		fmt.Println(err)
+	c := fpl.Client{}
+	array := c.ListWeeklyPoints()
+	fmt.Println(array.Rank)
+	for i, v := range array {
+		fmt.Println(i, v)
 	}
 
-	req.Header.Add("User-Agent", "")
-
-	var client = &http.Client{
-		Timeout: time.Second * 10,
-	}
-
-	resp, err := client.Do(req)
-	if err != nil{
-		fmt.Println(err)
-	}
-
-	response, err := ioutil.ReadAll(resp.Body)
-	if err != nil{
-		fmt.Println(err)
-	}
-
-	fmt.Println(string(response))
+	
 
 }

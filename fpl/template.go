@@ -1,4 +1,4 @@
-package main
+package fpl
 
 import (
 	"time"
@@ -370,7 +370,7 @@ type Manager struct {
 	LastDeadlineTotalTransfers int         `json:"last_deadline_total_transfers"`
 }
 
-type ManagerHistory struct {
+type Weekly struct {
 	Current []struct {
 		Event              int `json:"event"`
 		Points             int `json:"points"`
@@ -384,8 +384,22 @@ type ManagerHistory struct {
 		EventTransfersCost int `json:"event_transfers_cost"`
 		PointsOnBench      int `json:"points_on_bench"`
 	} `json:"current"`
-	Past  []interface{} `json:"past"`
-	Chips []interface{} `json:"chips"`
+	Past  *[]interface{} `json:"past"`
+	Chips *[]interface{} `json:"chips"`
+}
+
+type WeeklyResponse struct {
+	Event              int `json:"event"`
+	Points             int `json:"points"`
+	TotalPoints        int `json:"total_points"`
+	Rank               int `json:"rank"`
+	RankSort           int `json:"rank_sort"`
+	OverallRank        int `json:"overall_rank"`
+	Bank               int `json:"bank"`
+	Value              int `json:"value"`
+	EventTransfers     int `json:"event_transfers"`
+	EventTransfersCost int `json:"event_transfers_cost"`
+	PointsOnBench      int `json:"points_on_bench"`
 }
 
 type LeagueInfo struct {
