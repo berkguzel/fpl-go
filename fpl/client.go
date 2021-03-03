@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"fmt"
 	"io/ioutil"
-	"encoding/json"
+
 )
 
 type Client struct {
@@ -16,7 +16,7 @@ type Client struct {
 }
 
 
-func DoNewRequest(method string, url string) (*http.Request, error){
+func (c *Client)DoNewRequest(method string, url string) (*http.Request, error){
 
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
@@ -25,59 +25,24 @@ func DoNewRequest(method string, url string) (*http.Request, error){
 	req.Header.Set("User-Agent", "")
 
 	return req, nil
-	
 }
 
-func (c *Client) Request(resp *http.Response) (string, error){
+func (c *Client) Request(req *http.Request) ([]byte, error) {
 
-	response, err := ioutil.ReadAll(resp.Body)
-	if err != nil{
-		fmt.Println(err)
-	}
-	return string(response), nil
-
-}
-
-func UnmarshallJSON(b []byte,v interface{}) (interface{}, error) {
-	
-	//data := make(map[string]interface{})
-
-
-	if err := json.Unmarshal(b, v); err != nil {
-		return nil, err
-	}
-	//data["a"] = v
-
-	return v, nil
-}
-/*
-func main(){
-
-	
-	req, err := http.NewRequest("GET", "https://fantasy.premierleague.com/api/entry/7270639/history/", nil)
-	if err != nil{
-		fmt.Println(err)
-	}
-
-	req.Header.Add("User-Agent", "")
-
-	var client = &http.Client{
-		Timeout: time.Second * 10,
-	}
-
+	client := &c.httpClient
 	resp, err := client.Do(req)
 	if err != nil{
-		fmt.Println(err)
+		return nil, err
 	}
 
 	response, err := ioutil.ReadAll(resp.Body)
 	if err != nil{
-		fmt.Println(err)
+		return nil, err
 	}
+	defer resp.Body.Close()
+	b := []byte(response)
 
-	fmt.Println(string(response))
-	
-	Get()
-
+	return b, nil
 }
-*/
+
+

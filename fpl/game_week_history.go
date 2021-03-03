@@ -3,53 +3,116 @@ package fpl
 import (
 	"fmt"
 	"encoding/json"
-	
-	"github.com/fatih/structs"
+	"errors"
+	"strings"
+
+	//"github.com/fatih/structs"
+)
+type Person struct {
+	Name  string
+	Last string
+}
+
+const (
+	addr = "https://fantasy.premierleague.com/api/entry/7270639/history/"
 )
 
+func (c *Client) ListWeeklyPoints(gameWeek int) (*WeeklyResponse, error){
 
-func (c *Client) Get(gameWeek int) (*WeeklyResponse, error){
-
-	req, err := DoNewRequest("GET", "https://fantasy.premierleague.com/api/entry/7270639/history/")
+	req, err := c.DoNewRequest("GET", addr)
 	if err != nil{
 		fmt.Println(err)
 	}
 	
-	client := &c.httpClient
-	resp, err := client.Do(req)
-	if err != nil{
-		return nil, err
+	response, respErr := c.Request(req)
+	if respErr != nil{
+		return nil, respErr
 	}
 
-	x, respErr := c.Request(resp)
+	v := &Weekly{}
+	if err := json.Unmarshal(response, &v); err != nil {
+		fmt.Println(err)
+    }
+
+	
+	for index, value := range  v.Current{
+
+		if value.Event == gameWeek {
+			
+			m, err := json.Marshal(v.Current[index])
+			if err != nil{
+				fmt.Println(err)
+			}
+			fmt.Printf("%T", v.Current[index])
+
+			w := &WeeklyResponse{}
+			
+			dec := json.NewDecoder(strings.NewReader(string(m)))
+			erros := dec.Decode(&w)
+			if erros != nil{
+				fmt.Println(erros)
+			}
+			return w, nil		
+		} 		
+	}
+	return nil, errors.New("Could not find game week")
+}
+
+func (c *Client) ListWeeklyPointsx(gameWeek int) (*WeeklyResponse, error){
+
+	req, err := c.DoNewRequest("GET", addr)
+	if err != nil{
+		fmt.Println(err)
+	}
+	
+	response, respErr := c.Request(req)
+	if respErr != nil{
+		return nil, respErr
+	}
+
+	v := &Weekly{}
+	if err := json.Unmarshal(response, &v); err != nil {
+		fmt.Println(err)
+    }
+
+	var person map[string]interface{}	
+	json.Unmarshal([]byte(response), &person)
+
+	for _, v := range person {
+		switch v := v.(type) {
+		case []interface{}:
+            for _, ival := range v {
+				
+                fmt.Printf("%T", ival)
+            }
+		}
+
+
+    }
+
+	
+	
+	return nil, errors.New("Could not find game week")
+}
+
+
+func (c *Client) ListAllWeeks() ([]*Weekly, error) {
+	
+	req, err := c.DoNewRequest("GET", addr)
+	if err != nil{
+		fmt.Println(err)
+	}
+	
+	response, respErr := c.Request(req)
 	if err != nil{
 		fmt.Println(respErr)
 	}
 
-	v := &Weekly{}
-	b := []byte(x)
-	
+	w := &Weekly{}
+	json.Unmarshal(response, &w)
 
-	_, JSONErr := UnmarshallJSON(b, &v)
-	if JSONErr != nil{
-		return nil, JSONErr
-	}
+	var arrayOfWeeks []*Weekly
+	arrayOfWeeks = append(arrayOfWeeks, w)
 
-	curr := v.Current[1]
-	m, _ := json.Marshal(curr)
-	wee := &WeeklyResponse{}
-	_ = json.Unmarshal(m, &wee)
-	
-
-	
-	return wee,   nil
-}
-
-
-func (c *Client) ListWeeklyPoints() map[string]interface{}{
-	
-	weeklyResponse, _ := c.Get(5)
-	m := structs.Map(weeklyResponse)
-
-	return m
+	return  arrayOfWeeks, nil
 }

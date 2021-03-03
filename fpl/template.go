@@ -384,8 +384,8 @@ type Weekly struct {
 		EventTransfersCost int `json:"event_transfers_cost"`
 		PointsOnBench      int `json:"points_on_bench"`
 	} `json:"current"`
-	Past  *[]interface{} `json:"past"`
-	Chips *[]interface{} `json:"chips"`
+	Past  []interface{} `json:"past"`
+	Chips []interface{} `json:"chips"`
 }
 
 type WeeklyResponse struct {
@@ -435,7 +435,18 @@ type LeagueInfo struct {
 		Results []interface{} `json:"results"`
 	} `json:"standings"`
 }
+type LeagueResponse struct {
+	Entry 		int 	`json:"entry"` 
+	EntryName   string  `json:"entry_name"`
+	EventTotal 	int 	`json:"event_total"`
+	ID 			int 	`json:"id"`
+	LastRank 	int 	`json:"last_rank"`
+	PlayerName string 	`json:"player_name"`
+	Rank 		int 	`json:"rank"`
+	RankSort 	int 	`json:"rank_sort"`
+	Total 		int 	`json:"total"`
 
+}
 type MyTeam struct {
 	Picks []struct {
 		Element       int  `json:"element"`

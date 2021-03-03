@@ -1,18 +1,16 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/berkguzel/fpl-go/fpl"
 )
 func main(){
 
 	c := fpl.Client{}
-	array := c.ListWeeklyPoints()
-	fmt.Println(array.Rank)
-	for i, v := range array {
-		fmt.Println(i, v)
-	}
-
+	_, _ = c.ListStandings()
+	//array, _ := c.ListAllWeeks()
 	
-
+	
+	//fmt.Println(array)
+	
 }
