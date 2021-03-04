@@ -57,45 +57,7 @@ func (c *Client) ListWeeklyPoints(gameWeek int) (*WeeklyResponse, error){
 	}
 	return nil, errors.New("Could not find game week")
 }
-
-func (c *Client) ListWeeklyPointsx(gameWeek int) (*WeeklyResponse, error){
-
-	req, err := c.DoNewRequest("GET", addr)
-	if err != nil{
-		fmt.Println(err)
-	}
-	
-	response, respErr := c.Request(req)
-	if respErr != nil{
-		return nil, respErr
-	}
-
-	v := &Weekly{}
-	if err := json.Unmarshal(response, &v); err != nil {
-		fmt.Println(err)
-    }
-
-	var person map[string]interface{}	
-	json.Unmarshal([]byte(response), &person)
-
-	for _, v := range person {
-		switch v := v.(type) {
-		case []interface{}:
-            for _, ival := range v {
-				
-                fmt.Printf("%T", ival)
-            }
-		}
-
-
-    }
-
-	
-	
-	return nil, errors.New("Could not find game week")
-}
-
-
+// ListAllWeeks ...
 func (c *Client) ListAllWeeks() ([]*Weekly, error) {
 	
 	req, err := c.DoNewRequest("GET", addr)

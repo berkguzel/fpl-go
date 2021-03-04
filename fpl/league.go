@@ -9,11 +9,12 @@ import (
 )
 
 const (
-	leagueAddres = "https://fantasy.premierleague.com/api/leagues-classic/1859418/standings/"
+	leagueAddress = "https://fantasy.premierleague.com/api/leagues-classic/1859418/standings/"
 )
-func (c *Client) ListStandings()(*LeagueInfo, error){
 
-	req, err := c.DoNewRequest("GET", leagueAddres)
+func (c *Client) ListStandings()([]LeagueResponse, error){
+
+	req, err := c.DoNewRequest("GET", leagueAddress)
 	if err != nil{
 		fmt.Println(err)
 	}
@@ -23,18 +24,19 @@ func (c *Client) ListStandings()(*LeagueInfo, error){
 		return nil, respErr
 	}
 
-	league := &LeagueInfo{}
-	json.Unmarshal(response, &league)
-	standings := league.Standings.Results
+	leagueInfo := &LeagueInfo{}
+	json.Unmarshal(response, &leagueInfo)
+	standings := leagueInfo.Standings.Results
 
-	var leaguex LeagueResponse
-	hadi, _ := json.Marshal(standings[1])
-	fmt.Println(string(hadi))
-	json.Unmarshal(hadi, &leaguex)
-	fmt.Println(leaguex)
+	league := []LeagueResponse{}
+	var l LeagueResponse
 	
-	
+	for _, v := range standings {
+		resp, _ := json.Marshal(v)
+		json.Unmarshal(resp, &l)
+		league = append(league,l)
 
+	}
 
-	return nil, errors.New("Could not find league info")
+	return league, errors.New("Could not find league info")
 }

@@ -1,0 +1,6 @@
+{
+    "go.languageServerFlags": [
+    
+    ],
+    "go.lintTool": "golangci-lint"
+}
