@@ -71,7 +71,10 @@ func (c *Client) ListAllWeeks() ([]*Weekly, error) {
 	}
 
 	w := &Weekly{}
-	json.Unmarshal(response, &w)
+	errMar := json.Unmarshal(response, &w)
+	if errMar != nil {
+		fmt.Println(errMar)
+	}
 
 	var arrayOfWeeks []*Weekly
 	arrayOfWeeks = append(arrayOfWeeks, w)

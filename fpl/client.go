@@ -45,4 +45,3 @@ func (c *Client) Request(req *http.Request) ([]byte, error) {
 	return b, nil
 }
 
-
