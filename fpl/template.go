@@ -351,16 +351,16 @@ type GameSettingsResponse struct {
 }
 type ElementTypesResponse struct  {
 	ID                 int    `json:"id"`
-		PluralName         string `json:"plural_name"`
-		PluralNameShort    string `json:"plural_name_short"`
-		SingularName       string `json:"singular_name"`
-		SingularNameShort  string `json:"singular_name_short"`
-		SquadSelect        int    `json:"squad_select"`
-		SquadMinPlay       int    `json:"squad_min_play"`
-		SquadMaxPlay       int    `json:"squad_max_play"`
-		UIShirtSpecific    bool   `json:"ui_shirt_specific"`
-		SubPositionsLocked []int  `json:"sub_positions_locked"`
-		ElementCount       int    `json:"element_count"`
+	PluralName         string `json:"plural_name"`
+	PluralNameShort    string `json:"plural_name_short"`
+	SingularName       string `json:"singular_name"`
+	SingularNameShort  string `json:"singular_name_short"`
+	SquadSelect        int    `json:"squad_select"`
+	SquadMinPlay       int    `json:"squad_min_play"`
+	SquadMaxPlay       int    `json:"squad_max_play"`
+	UIShirtSpecific    bool   `json:"ui_shirt_specific"`
+	SubPositionsLocked []int  `json:"sub_positions_locked"`
+	ElementCount       int    `json:"element_count"`
 
 }
 type Fixture []struct {
@@ -655,4 +655,40 @@ type MyTeam struct {
 		Bank   int    `json:"bank"`
 		Value  int    `json:"value"`
 	} `json:"transfers"`
+}
+
+type TransferHistory struct {
+	ElementIn      int       `json:"element_in"`
+	ElementInCost  int       `json:"element_in_cost"`
+	ElementOut     int       `json:"element_out"`
+	ElementOutCost int       `json:"element_out_cost"`
+	Entry          int       `json:"entry"`
+	Evnt           int       `json:"evnt,omitempty"`
+	Time           time.Time `json:"time"`
+	Event          int       `json:"event,omitempty"`
+}
+
+type TeamWeekly struct {
+	ActiveChip    string        `json:"active_chip"`
+	AutomaticSubs []interface{} `json:"automatic_subs"`
+	EntryHistory  struct {
+		Event              int `json:"event"`
+		Points             int `json:"points"`
+		TotalPoints        int `json:"total_points"`
+		Rank               int `json:"rank"`
+		RankSort           int `json:"rank_sort"`
+		OverallRank        int `json:"overall_rank"`
+		Bank               int `json:"bank"`
+		Value              int `json:"value"`
+		EventTransfers     int `json:"event_transfers"`
+		EventTransfersCost int `json:"event_transfers_cost"`
+		PointsOnBench      int `json:"points_on_bench"`
+	} `json:"entry_history"`
+	Picks []struct {
+		Element       int  `json:"element"`
+		Position      int  `json:"position"`
+		Multiplier    int  `json:"multiplier"`
+		IsCaptain     bool `json:"is_captain"`
+		IsViceCaptain bool `json:"is_vice_captain"`
+	} `json:"picks"`
 }

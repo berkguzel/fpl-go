@@ -12,7 +12,6 @@ type Client struct {
 	BaseURL *url.URL
 	UserAgent string 
 	httpClient http.Client 
-	response string
 }
 
 

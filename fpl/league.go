@@ -24,7 +24,10 @@ func (c *Client) ListStandings()([]LeagueResponse, error){
 	}
 
 	leagueInfo := &LeagueInfo{}
-	json.Unmarshal(response, &leagueInfo)
+	errMars := json.Unmarshal(response, &leagueInfo)
+	if errMars != nil{
+		fmt.Println(errMars)
+	}
 	standings := leagueInfo.Standings.Results
 
 	league := []LeagueResponse{}
@@ -32,7 +35,10 @@ func (c *Client) ListStandings()([]LeagueResponse, error){
 	
 	for _, v := range standings {
 		resp, _ := json.Marshal(v)
-		json.Unmarshal(resp, &l)
+		errMars = json.Unmarshal(resp, &l)
+		if errMars != nil{
+			fmt.Println(errMars)
+		}
 		league = append(league,l)
 
 	}

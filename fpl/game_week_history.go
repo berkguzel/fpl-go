@@ -6,7 +6,6 @@ import (
 	"errors"
 	"strings"
 
-	//"github.com/fatih/structs"
 )
 type Person struct {
 	Name  string
@@ -15,7 +14,9 @@ type Person struct {
 
 const (
 	addr = "https://fantasy.premierleague.com/api/entry/7270639/history/"
+	performanceAddress = "https://fantasy.premierleague.com/api/entry/7270639/event/26/picks/"
 )
+
 
 func (c *Client) ListWeeklyPoints(gameWeek int) (*WeeklyResponse, error){
 
@@ -80,4 +81,25 @@ func (c *Client) ListAllWeeks() ([]*Weekly, error) {
 	arrayOfWeeks = append(arrayOfWeeks, w)
 
 	return  arrayOfWeeks, nil
+}
+
+// individual performanca
+func (c *Client) ListWeeklyPerformance() {
+	req, err := c.DoNewRequest("GET", performanceAddress)
+	if err != nil{
+		fmt.Println(err)
+	}
+	
+	response, respErr := c.Request(req)
+	if respErr != nil{
+		fmt.Println(respErr)
+	}
+
+	perf := &TeamWeekly{}
+
+	errMars := json.Unmarshal(response, &perf)
+	if errMars != nil{
+		fmt.Println(errMars)
+	}
+
 }
