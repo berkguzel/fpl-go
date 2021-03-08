@@ -1,105 +1,85 @@
 package fpl
 
 import (
-	"fmt"
 	"encoding/json"
 	"errors"
-	"strings"
-
+	"strconv"
 )
 type Person struct {
 	Name  string
 	Last string
 }
 
-const (
-	addr = "https://fantasy.premierleague.com/api/entry/7270639/history/"
-	performanceAddress = "https://fantasy.premierleague.com/api/entry/7270639/event/26/picks/"
-)
+func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error){
 
+	managerID, _ := Get()
+	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/history/"
 
-func (c *Client) ListWeeklyPoints(gameWeek int) (*WeeklyResponse, error){
-
-	req, err := c.DoNewRequest("GET", addr)
-	if err != nil{
-		fmt.Println(err)
-	}
-	
-	response, respErr := c.Request(req)
-	if respErr != nil{
-		return nil, respErr
-	}
+	response, _ := c.Do("GET", url)
 
 	v := &Weekly{}
 	if err := json.Unmarshal(response, &v); err != nil {
-		fmt.Println(err)
+		return nil, err
     }
 
-	
+	var wResponse []WeeklyInfo
 	for index, value := range  v.Current{
 
 		if value.Event == gameWeek {
 			
 			m, err := json.Marshal(v.Current[index])
 			if err != nil{
-				fmt.Println(err)
+				return nil, err
 			}
-			fmt.Printf("%T", v.Current[index])
 
-			w := &WeeklyResponse{}
+			w := &WeeklyInfo{}
 			
-			dec := json.NewDecoder(strings.NewReader(string(m)))
-			erros := dec.Decode(&w)
-			if erros != nil{
-				fmt.Println(erros)
+			if err := json.Unmarshal(m, &w); err != nil {
+				return nil, err
 			}
-			return w, nil		
+		
+			wResponse = append(wResponse, *w)
+			return wResponse, nil		
 		} 		
 	}
 	return nil, errors.New("Could not find game week")
 }
-// ListAllWeeks ...
-func (c *Client) ListAllWeeks() ([]*Weekly, error) {
-	
-	req, err := c.DoNewRequest("GET", addr)
-	if err != nil{
-		fmt.Println(err)
-	}
-	
-	response, respErr := c.Request(req)
-	if err != nil{
-		fmt.Println(respErr)
-	}
+// List all weeks
+func (c *Client) ListAllWeeks() ([]Weekly, error) {
+
+	managerID, _ := Get()
+
+	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/history/"
+	response, _ := c.Do("GET", url)
 
 	w := &Weekly{}
-	errMar := json.Unmarshal(response, &w)
-	if errMar != nil {
-		fmt.Println(errMar)
+	err := json.Unmarshal(response, &w)
+	if err != nil {
+		return nil, err
 	}
 
-	var arrayOfWeeks []*Weekly
-	arrayOfWeeks = append(arrayOfWeeks, w)
+	var allWeeks []Weekly
+	allWeeks = append(allWeeks, *w)
 
-	return  arrayOfWeeks, nil
+	return  allWeeks, nil
 }
 
-// individual performanca
-func (c *Client) ListWeeklyPerformance() {
-	req, err := c.DoNewRequest("GET", performanceAddress)
-	if err != nil{
-		fmt.Println(err)
-	}
+// individual performances of players weekly
+func (c *Client) ListWeeklyPerformance(week int) ([]TeamWeekly, error){
+
+	managerID, _ := Get()
+
+	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/event/" + strconv.Itoa(week) + "/picks/"
+	response, _ := c.Do("GET", url)
 	
-	response, respErr := c.Request(req)
-	if respErr != nil{
-		fmt.Println(respErr)
-	}
-
 	perf := &TeamWeekly{}
-
-	errMars := json.Unmarshal(response, &perf)
-	if errMars != nil{
-		fmt.Println(errMars)
+	
+	err := json.Unmarshal(response, &perf)
+	if err != nil{
+		return nil, err
 	}
+	var perfResponse []TeamWeekly
+	perfResponse = append(perfResponse, *perf)
 
+	return perfResponse, nil
 }

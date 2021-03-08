@@ -5,6 +5,8 @@ import (
 	"net/url"
 	"fmt"
 	"io/ioutil"
+	"log"
+
 
 )
 
@@ -15,7 +17,8 @@ type Client struct {
 }
 
 
-func (c *Client)DoNewRequest(method string, url string) (*http.Request, error){
+
+func (c *Client) Do(method string, url string)([]byte, error){
 
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
@@ -23,24 +26,18 @@ func (c *Client)DoNewRequest(method string, url string) (*http.Request, error){
 	}
 	req.Header.Set("User-Agent", "")
 
-	return req, nil
-}
-
-func (c *Client) Request(req *http.Request) ([]byte, error) {
-
 	client := &c.httpClient
 	resp, err := client.Do(req)
 	if err != nil{
-		return nil, err
+		log.Fatal(err)
 	}
 
 	response, err := ioutil.ReadAll(resp.Body)
 	if err != nil{
-		return nil, err
+		log.Fatal(err)
 	}
 	defer resp.Body.Close()
 	b := []byte(response)
 
 	return b, nil
 }
-

@@ -1,32 +1,24 @@
 package fpl
 
 import (
-	"fmt"
 	"errors"
 	"encoding/json"
 
 )
 
-const (
-	leagueAddress = "https://fantasy.premierleague.com/api/leagues-classic/1859418/standings/"
-)
-
 func (c *Client) ListStandings()([]LeagueResponse, error){
 
-	req, err := c.DoNewRequest("GET", leagueAddress)
-	if err != nil{
-		fmt.Println(err)
-	}
+	_, teamID := Get()
+
+	url := "https://fantasy.premierleague.com/api/leagues-classic/" + teamID + "/standings/"
 	
-	response, respErr := c.Request(req)
-	if respErr != nil{
-		return nil, respErr
-	}
+
+	response, _ := c.Do("GET", url)
 
 	leagueInfo := &LeagueInfo{}
-	errMars := json.Unmarshal(response, &leagueInfo)
-	if errMars != nil{
-		fmt.Println(errMars)
+	err := json.Unmarshal(response, &leagueInfo)
+	if err != nil{
+		return nil, err
 	}
 	standings := leagueInfo.Standings.Results
 
@@ -35,9 +27,9 @@ func (c *Client) ListStandings()([]LeagueResponse, error){
 	
 	for _, v := range standings {
 		resp, _ := json.Marshal(v)
-		errMars = json.Unmarshal(resp, &l)
-		if errMars != nil{
-			fmt.Println(errMars)
+		err = json.Unmarshal(resp, &l)
+		if err != nil{
+			return nil, err
 		}
 		league = append(league,l)
 

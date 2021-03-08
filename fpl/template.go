@@ -511,37 +511,37 @@ type Manager struct {
 	SummaryEventRank         int       `json:"summary_event_rank"`
 	CurrentEvent             int       `json:"current_event"`
 	Leagues                  struct {
-		Classic []struct {
-			ID             int         `json:"id"`
-			Name           string      `json:"name"`
-			ShortName      string      `json:"short_name"`
-			Created        time.Time   `json:"created"`
-			Closed         bool        `json:"closed"`
-			Rank           interface{} `json:"rank"`
-			MaxEntries     interface{} `json:"max_entries"`
-			LeagueType     string      `json:"league_type"`
-			Scoring        string      `json:"scoring"`
-			AdminEntry     interface{} `json:"admin_entry"`
-			StartEvent     int         `json:"start_event"`
-			EntryCanLeave  bool        `json:"entry_can_leave"`
-			EntryCanAdmin  bool        `json:"entry_can_admin"`
-			EntryCanInvite bool        `json:"entry_can_invite"`
-			HasCup         bool        `json:"has_cup"`
-			CupLeague      interface{} `json:"cup_league"`
-			CupQualified   interface{} `json:"cup_qualified"`
-			EntryRank      int         `json:"entry_rank"`
-			EntryLastRank  int         `json:"entry_last_rank"`
-		} `json:"classic"`
-		H2H []interface{} `json:"h2h"`
-		Cup struct {
-			Matches []interface{} `json:"matches"`
-			Status  struct {
-				QualificationEvent   int    `json:"qualification_event"`
-				QualificationNumbers int    `json:"qualification_numbers"`
-				QualificationRank    int    `json:"qualification_rank"`
-				QualificationState   string `json:"qualification_state"`
-			} `json:"status"`
-			CupLeague int `json:"cup_league"`
+	Classic []struct {
+		ID             int         `json:"id"`
+		Name           string      `json:"name"`
+		ShortName      string      `json:"short_name"`
+		Created        time.Time   `json:"created"`
+		Closed         bool        `json:"closed"`
+		Rank           interface{} `json:"rank"`
+		MaxEntries     interface{} `json:"max_entries"`
+		LeagueType     string      `json:"league_type"`
+		Scoring        string      `json:"scoring"`
+		AdminEntry     interface{} `json:"admin_entry"`
+		StartEvent     int         `json:"start_event"`
+		EntryCanLeave  bool        `json:"entry_can_leave"`
+		EntryCanAdmin  bool        `json:"entry_can_admin"`
+		EntryCanInvite bool        `json:"entry_can_invite"`
+		HasCup         bool        `json:"has_cup"`
+		CupLeague      interface{} `json:"cup_league"`
+		CupQualified   interface{} `json:"cup_qualified"`
+		EntryRank      int         `json:"entry_rank"`
+		EntryLastRank  int         `json:"entry_last_rank"`
+	} `json:"classic"`
+	H2H []interface{} `json:"h2h"`
+	Cup struct {
+		Matches []interface{} `json:"matches"`
+		Status  struct {
+			QualificationEvent   int    `json:"qualification_event"`
+			QualificationNumbers int    `json:"qualification_numbers"`
+			QualificationRank    int    `json:"qualification_rank"`
+			QualificationState   string `json:"qualification_state"`
+		} `json:"status"`
+		CupLeague int `json:"cup_league"`
 		} `json:"cup"`
 	} `json:"leagues"`
 	Name                       string      `json:"name"`
@@ -550,6 +550,48 @@ type Manager struct {
 	LastDeadlineValue          int         `json:"last_deadline_value"`
 	LastDeadlineTotalTransfers int         `json:"last_deadline_total_transfers"`
 }
+type ManagerResponse struct{
+
+}
+
+type ManagerLeaguesClassic struct{
+	ID             int         `json:"id"`
+	Name           string      `json:"name"`
+	ShortName      string      `json:"short_name"`
+	Created        time.Time   `json:"created"`
+	Closed         bool        `json:"closed"`
+	Rank           interface{} `json:"rank"`
+	MaxEntries     interface{} `json:"max_entries"`
+	LeagueType     string      `json:"league_type"`
+	Scoring        string      `json:"scoring"`
+	AdminEntry     interface{} `json:"admin_entry"`
+	StartEvent     int         `json:"start_event"`
+	EntryCanLeave  bool        `json:"entry_can_leave"`
+	EntryCanAdmin  bool        `json:"entry_can_admin"`
+	EntryCanInvite bool        `json:"entry_can_invite"`
+	HasCup         bool        `json:"has_cup"`
+	CupLeague      interface{} `json:"cup_league"`
+	CupQualified   interface{} `json:"cup_qualified"`
+	EntryRank      int         `json:"entry_rank"`
+	EntryLastRank  int         `json:"entry_last_rank"`
+}
+
+type ManagerLeaguesCup struct{
+	Matches []interface{} `json:"matches"`
+		Status  struct {
+			QualificationEvent   int    `json:"qualification_event"`
+			QualificationNumbers int    `json:"qualification_numbers"`
+			QualificationRank    int    `json:"qualification_rank"`
+			QualificationState   string `json:"qualification_state"`
+		} `json:"status"`
+	CupLeague int `json:"cup_league"`
+	 
+}
+
+type ManagerCup struct{}
+
+
+
 
 type Weekly struct {
 	Current []struct {
@@ -569,7 +611,7 @@ type Weekly struct {
 	Chips []interface{} `json:"chips"`
 }
 
-type WeeklyResponse struct {
+type WeeklyInfo struct {
 	Event              int `json:"event"`
 	Points             int `json:"points"`
 	TotalPoints        int `json:"total_points"`

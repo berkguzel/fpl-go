@@ -4,25 +4,22 @@ import (
 	"encoding/json"
 )
 
-const (
-	transferHistoryAddress  = "https://fantasy.premierleague.com/api/entry/7270639/transfers/"
-)
 func(c *Client) ListTransfers()([]TransferHistory, error) {
-	req, err := c.DoNewRequest("GET", transferHistoryAddress)
+
+	managerID, _ := Get()
+	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/transfers/"
+	
+	response, err := c.Do("GET", url)
 	if err != nil{
 		return nil, err
 	}
-	
-	response, respErr := c.Request(req)
-	if respErr != nil{
-		return nil, respErr
-	}
 
 	var transfer []TransferHistory
-
-	if err := json.Unmarshal(response, &transfer); err != nil {
+	
+	err = json.Unmarshal(response, &transfer)
+	if err != nil{
 		return nil, err
-    }
+	}
 
 	return transfer, nil
 }

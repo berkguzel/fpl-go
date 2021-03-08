@@ -1,7 +1,7 @@
 package fpl
 
 import (
-	"fmt"
+	"encoding/json"
 )
 
 const (
@@ -9,17 +9,12 @@ const (
 )
 
 func(c *Client) GetFixture()(*Fixture, error){
-	req, err := c.DoNewRequest("GET", fixtureAddress)
-	if err != nil{
-		fmt.Println(err)
-	}
 	
-	response, respErr := c.Request(req)
-	if respErr != nil{
-		return nil, respErr
+	response, _ := c.Do("GET", fixtureAddress)
+	fixture := &Fixture{}
+	err := json.Unmarshal(response, &fixture)
+	if err != nil{
+		return nil, err
 	}
-
-	fmt.Println(response)
-
-	return nil, nil
+	return fixture, nil
 }

@@ -2,29 +2,66 @@ package fpl
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
-const (
-	managerAddress = "https://fantasy.premierleague.com/api/entry/7270639/"
-)
-func (c *Client) Manager()(*Manager, error) {
-	req, err := c.DoNewRequest("GET", managerAddress)
-	if err != nil{
-		fmt.Println(err)
-	}
+
+func (c *Client) Manager() (*Manager, error){
 	
-	response, respErr := c.Request(req)
-	if respErr != nil{
-		return nil, respErr
-	}
-
-
 	manager := &Manager{}
-	err = json.Unmarshal(response, &manager)
+	managerID, _ := Get()
+	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/"
+
+	res, _ := c.Do("GET", url)
+
+	err := json.Unmarshal(res, manager)
 	if err != nil{
 		return nil, err
 	}
-
+	
 	return manager, nil
+}
+
+func (c *Client) LeagueClassic() ([]ManagerLeaguesClassic, error){
+	
+	manager, err := c.Manager()
+	if err != nil{
+		return nil, err
+	}
+	
+	b, err := json.Marshal(manager.Leagues.Classic)
+	if err != nil{
+		return nil, err
+	}
+	
+	var classic  []ManagerLeaguesClassic
+	err = json.Unmarshal(b, &classic)
+	if err != nil {
+		return nil, err
+	}
+
+	return classic, nil
+}
+
+func (c *Client) LeagueCup() ([]ManagerLeaguesCup, error){
+
+	manager, err := c.Manager()
+	if err != nil{
+		return nil, err
+	}
+	
+	b, err := json.Marshal(manager.Leagues.Cup)
+	if err != nil{
+		return nil, err
+	}
+	
+	cup := &ManagerLeaguesCup{}
+	err = json.Unmarshal(b, &cup)
+	if err != nil {
+		return nil, err
+	}
+
+	var leagueCup []ManagerLeaguesCup
+	leagueCup = append(leagueCup, *cup)
+	
+	return leagueCup, nil
 }
