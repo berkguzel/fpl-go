@@ -1,16 +1,15 @@
 package fpl
 
 import (
-	"errors"
 	"encoding/json"
 
 )
 
 func (c *Client) ListStandings()([]LeagueResponse, error){
 
-	_, teamID := Get()
+	_, leagueID := Get()
 
-	url := "https://fantasy.premierleague.com/api/leagues-classic/" + teamID + "/standings/"
+	url := "https://fantasy.premierleague.com/api/leagues-classic/" + leagueID + "/standings/"
 	
 
 	response, _ := c.Do("GET", url)
@@ -35,5 +34,5 @@ func (c *Client) ListStandings()([]LeagueResponse, error){
 
 	}
 
-	return league, errors.New("Could not find league info")
+	return league, nil
 }

@@ -1,18 +1,15 @@
 package fpl
 
 import (
+
+	"io/ioutil"
 	"net/http"
 	"net/url"
-	"fmt"
-	"io/ioutil"
-	"log"
-
-
 )
 
 type Client struct {
 	BaseURL *url.URL
-	UserAgent string 
+	Header string 
 	httpClient http.Client 
 }
 
@@ -22,19 +19,19 @@ func (c *Client) Do(method string, url string)([]byte, error){
 
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 	req.Header.Set("User-Agent", "")
 
 	client := &c.httpClient
 	resp, err := client.Do(req)
-	if err != nil{
-		log.Fatal(err)
+	if err != nil {
+		return nil, err
 	}
 
 	response, err := ioutil.ReadAll(resp.Body)
 	if err != nil{
-		log.Fatal(err)
+		return nil, err
 	}
 	defer resp.Body.Close()
 	b := []byte(response)

@@ -137,7 +137,7 @@ func(c *Client) ListGameSettings() ([]GameSettingsResponse, error) {
 
 	general, _ := c.GetGeneral()
 	
-	var g []GameSettingsResponse
+	g := &GameSettingsResponse{}
 	
 	m, err := json.Marshal(general.GameSettings)
 	if err != nil{
@@ -148,6 +148,9 @@ func(c *Client) ListGameSettings() ([]GameSettingsResponse, error) {
 		return nil, err
     }
 
-	return g, nil
+	var gameResponse []GameSettingsResponse
+	gameResponse = append(gameResponse, *g)
+
+	return gameResponse, nil
 
 }

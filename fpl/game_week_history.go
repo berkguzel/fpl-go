@@ -5,10 +5,6 @@ import (
 	"errors"
 	"strconv"
 )
-type Person struct {
-	Name  string
-	Last string
-}
 
 func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error){
 
