@@ -4,9 +4,8 @@ import (
 	"encoding/json"
 )
 
+func (c *Client) Manager() (*Manager, error) {
 
-func (c *Client) Manager() (*Manager, error){
-	
 	manager := &Manager{}
 	managerID, _ := Get()
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/"
@@ -14,26 +13,26 @@ func (c *Client) Manager() (*Manager, error){
 	res, _ := c.Do("GET", url)
 
 	err := json.Unmarshal(res, manager)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	return manager, nil
 }
 
-func (c *Client) LeagueClassic() ([]ManagerLeaguesClassic, error){
-	
+func (c *Client) LeagueClassic() ([]ManagerLeaguesClassic, error) {
+
 	manager, err := c.Manager()
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	b, err := json.Marshal(manager.Leagues.Classic)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
-	var classic  []ManagerLeaguesClassic
+
+	var classic []ManagerLeaguesClassic
 	err = json.Unmarshal(b, &classic)
 	if err != nil {
 		return nil, err
@@ -42,18 +41,18 @@ func (c *Client) LeagueClassic() ([]ManagerLeaguesClassic, error){
 	return classic, nil
 }
 
-func (c *Client) LeagueCup() ([]ManagerLeaguesCup, error){
+func (c *Client) LeagueCup() ([]ManagerLeaguesCup, error) {
 
 	manager, err := c.Manager()
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	b, err := json.Marshal(manager.Leagues.Cup)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	cup := &ManagerLeaguesCup{}
 	err = json.Unmarshal(b, &cup)
 	if err != nil {
@@ -62,6 +61,6 @@ func (c *Client) LeagueCup() ([]ManagerLeaguesCup, error){
 
 	var leagueCup []ManagerLeaguesCup
 	leagueCup = append(leagueCup, *cup)
-	
+
 	return leagueCup, nil
 }

@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error){
+func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error) {
 
 	managerID, _ := Get()
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/history/"
@@ -16,30 +16,31 @@ func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error){
 	v := &Weekly{}
 	if err := json.Unmarshal(response, &v); err != nil {
 		return nil, err
-    }
+	}
 
 	var wResponse []WeeklyInfo
-	for index, value := range  v.Current{
+	for index, value := range v.Current {
 
 		if value.Event == gameWeek {
-			
+
 			m, err := json.Marshal(v.Current[index])
-			if err != nil{
+			if err != nil {
 				return nil, err
 			}
 
 			w := &WeeklyInfo{}
-			
+
 			if err := json.Unmarshal(m, &w); err != nil {
 				return nil, err
 			}
-		
+
 			wResponse = append(wResponse, *w)
-			return wResponse, nil		
-		} 		
+			return wResponse, nil
+		}
 	}
 	return nil, errors.New("Could not find game week")
 }
+
 // List all weeks
 func (c *Client) ListAllWeeks() ([]Weekly, error) {
 
@@ -57,21 +58,21 @@ func (c *Client) ListAllWeeks() ([]Weekly, error) {
 	var allWeeks []Weekly
 	allWeeks = append(allWeeks, *w)
 
-	return  allWeeks, nil
+	return allWeeks, nil
 }
 
 // individual performances of players weekly
-func (c *Client) ListWeeklyPerformance(week int) ([]TeamWeekly, error){
+func (c *Client) ListWeeklyPerformance(week int) ([]TeamWeekly, error) {
 
 	managerID, _ := Get()
 
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/event/" + strconv.Itoa(week) + "/picks/"
 	response, _ := c.Do("GET", url)
-	
+
 	perf := &TeamWeekly{}
-	
+
 	err := json.Unmarshal(response, &perf)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	var perfResponse []TeamWeekly

@@ -1,21 +1,18 @@
 package fpl
 
 import (
-
 	"io/ioutil"
 	"net/http"
 	"net/url"
 )
 
 type Client struct {
-	BaseURL *url.URL
-	Header string 
-	httpClient http.Client 
+	BaseURL    *url.URL
+	Header     string
+	httpClient http.Client
 }
 
-
-
-func (c *Client) Do(method string, url string)([]byte, error){
+func (c *Client) Do(method string, url string) ([]byte, error) {
 
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
@@ -30,7 +27,7 @@ func (c *Client) Do(method string, url string)([]byte, error){
 	}
 
 	response, err := ioutil.ReadAll(resp.Body)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()

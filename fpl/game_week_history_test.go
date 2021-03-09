@@ -1,11 +1,10 @@
 package fpl
 
 import (
-	"testing" 
-
+	"testing"
 )
 
-func TestListWeeklyPoints(t *testing.T){
+func TestListWeeklyPoints(t *testing.T) {
 
 	c := &Client{}
 
@@ -15,12 +14,12 @@ func TestListWeeklyPoints(t *testing.T){
 	}
 }
 
-func TestListAllWeeks(t *testing.T){
+func TestListAllWeeks(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListAllWeeks()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -30,7 +29,7 @@ func TestListAllWeeks(t *testing.T){
 
 }
 
-func TestListWeeklyPerformance(t *testing.T){
+func TestListWeeklyPerformance(t *testing.T) {
 
 	c := &Client{}
 

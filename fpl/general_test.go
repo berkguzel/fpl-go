@@ -4,12 +4,12 @@ import (
 	"testing"
 )
 
-func TestGetGeneral(t *testing.T){
+func TestGetGeneral(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.GetGeneral()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 	if got == nil {
@@ -18,26 +18,26 @@ func TestGetGeneral(t *testing.T){
 
 }
 
-func TestListTeamInfo(t *testing.T){
+func TestListTeamInfo(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListTeamInfo()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 	if got == nil {
-		t.Errorf("Could do not be succeed, Got: %+v", got )
+		t.Errorf("Could do not be succeed, Got: %+v", got)
 	}
-	
+
 }
 
-func TestListEventInfo(t *testing.T){
+func TestListEventInfo(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListEventInfo()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -46,12 +46,12 @@ func TestListEventInfo(t *testing.T){
 	}
 }
 
-func TestListPhasesInfo(t *testing.T){
+func TestListPhasesInfo(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListEventInfo()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -60,12 +60,12 @@ func TestListPhasesInfo(t *testing.T){
 	}
 }
 
-func TestListElementsInfo(t *testing.T){
+func TestListElementsInfo(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListElementsInfo()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -74,12 +74,12 @@ func TestListElementsInfo(t *testing.T){
 	}
 }
 
-func TestListElementStatsInfo(t *testing.T){
+func TestListElementStatsInfo(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListElementStatsInfo()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -88,12 +88,12 @@ func TestListElementStatsInfo(t *testing.T){
 	}
 }
 
-func TestListElementTypesInfo(t *testing.T){
+func TestListElementTypesInfo(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListElementTypesInfo()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -102,12 +102,12 @@ func TestListElementTypesInfo(t *testing.T){
 	}
 }
 
-func TestListGameSettings(t *testing.T){
+func TestListGameSettings(t *testing.T) {
 
 	c := &Client{}
 
 	got, err := c.ListGameSettings()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 

@@ -188,53 +188,52 @@ type TeamResponse struct {
 	Form                interface{} `json:"form"`
 	ID                  int         `json:"id"`
 	Loss                int         `json:"loss"`
-		Name                string      `json:"name"`
-		Played              int         `json:"played"`
-		Points              int         `json:"points"`
-		Position            int         `json:"position"`
-		ShortName           string      `json:"short_name"`
-		Strength            int         `json:"strength"`
-		TeamDivision        interface{} `json:"team_division"`
-		Unavailable         bool        `json:"unavailable"`
-		Win                 int         `json:"win"`
-		StrengthOverallHome int         `json:"strength_overall_home"`
-		StrengthOverallAway int         `json:"strength_overall_away"`
-		StrengthAttackHome  int         `json:"strength_attack_home"`
-		StrengthAttackAway  int         `json:"strength_attack_away"`
-		StrengthDefenceHome int         `json:"strength_defence_home"`
-		StrengthDefenceAway int         `json:"strength_defence_away"`
-		PulseID             int         `json:"pulse_id"`
-	
+	Name                string      `json:"name"`
+	Played              int         `json:"played"`
+	Points              int         `json:"points"`
+	Position            int         `json:"position"`
+	ShortName           string      `json:"short_name"`
+	Strength            int         `json:"strength"`
+	TeamDivision        interface{} `json:"team_division"`
+	Unavailable         bool        `json:"unavailable"`
+	Win                 int         `json:"win"`
+	StrengthOverallHome int         `json:"strength_overall_home"`
+	StrengthOverallAway int         `json:"strength_overall_away"`
+	StrengthAttackHome  int         `json:"strength_attack_home"`
+	StrengthAttackAway  int         `json:"strength_attack_away"`
+	StrengthDefenceHome int         `json:"strength_defence_home"`
+	StrengthDefenceAway int         `json:"strength_defence_away"`
+	PulseID             int         `json:"pulse_id"`
 }
 
 type EventsResponse struct {
 	ID                     int    `json:"id"`
-		Name                   string `json:"name"`
-		DeadlineTime           string `json:"deadline_time"`
-		AverageEntryScore      int    `json:"average_entry_score"`
-		Finished               bool   `json:"finished"`
-		DataChecked            bool   `json:"data_checked"`
-		HighestScoringEntry    int    `json:"highest_scoring_entry"`
-		DeadlineTimeEpoch      int    `json:"deadline_time_epoch"`
-		DeadlineTimeGameOffset int    `json:"deadline_time_game_offset"`
-		HighestScore           int    `json:"highest_score"`
-		IsPrevious             bool   `json:"is_previous"`
-		IsCurrent              bool   `json:"is_current"`
-		IsNext                 bool   `json:"is_next"`
-		ChipPlays              []struct {
-			ChipName  string `json:"chip_name"`
-			NumPlayed int    `json:"num_played"`
-		} `json:"chip_plays"`
-		MostSelected      int `json:"most_selected"`
-		MostTransferredIn int `json:"most_transferred_in"`
-		TopElement        int `json:"top_element"`
-		TopElementInfo    struct {
-			ID     int `json:"id"`
-			Points int `json:"points"`
-		} `json:"top_element_info"`
-		TransfersMade     int `json:"transfers_made"`
-		MostCaptained     int `json:"most_captained"`
-		MostViceCaptained int `json:"most_vice_captained"`
+	Name                   string `json:"name"`
+	DeadlineTime           string `json:"deadline_time"`
+	AverageEntryScore      int    `json:"average_entry_score"`
+	Finished               bool   `json:"finished"`
+	DataChecked            bool   `json:"data_checked"`
+	HighestScoringEntry    int    `json:"highest_scoring_entry"`
+	DeadlineTimeEpoch      int    `json:"deadline_time_epoch"`
+	DeadlineTimeGameOffset int    `json:"deadline_time_game_offset"`
+	HighestScore           int    `json:"highest_score"`
+	IsPrevious             bool   `json:"is_previous"`
+	IsCurrent              bool   `json:"is_current"`
+	IsNext                 bool   `json:"is_next"`
+	ChipPlays              []struct {
+		ChipName  string `json:"chip_name"`
+		NumPlayed int    `json:"num_played"`
+	} `json:"chip_plays"`
+	MostSelected      int `json:"most_selected"`
+	MostTransferredIn int `json:"most_transferred_in"`
+	TopElement        int `json:"top_element"`
+	TopElementInfo    struct {
+		ID     int `json:"id"`
+		Points int `json:"points"`
+	} `json:"top_element_info"`
+	TransfersMade     int `json:"transfers_made"`
+	MostCaptained     int `json:"most_captained"`
+	MostViceCaptained int `json:"most_vice_captained"`
 }
 
 type PhasesResponse struct {
@@ -321,35 +320,35 @@ type ElementStatsResponse struct {
 
 type GameSettingsResponse struct {
 	LeagueJoinPrivateMax         int           `json:"league_join_private_max"`
-		LeagueJoinPublicMax          int           `json:"league_join_public_max"`
-		LeagueMaxSizePublicClassic   int           `json:"league_max_size_public_classic"`
-		LeagueMaxSizePublicH2H       int           `json:"league_max_size_public_h2h"`
-		LeagueMaxSizePrivateH2H      int           `json:"league_max_size_private_h2h"`
-		LeagueMaxKoRoundsPrivateH2H  int           `json:"league_max_ko_rounds_private_h2h"`
-		LeaguePrefixPublic           string        `json:"league_prefix_public"`
-		LeaguePointsH2HWin           int           `json:"league_points_h2h_win"`
-		LeaguePointsH2HLose          int           `json:"league_points_h2h_lose"`
-		LeaguePointsH2HDraw          int           `json:"league_points_h2h_draw"`
-		LeagueKoFirstInsteadOfRandom bool          `json:"league_ko_first_instead_of_random"`
-		CupStartEventID              int           `json:"cup_start_event_id"`
-		CupStopEventID               int           `json:"cup_stop_event_id"`
-		CupQualifyingMethod          string        `json:"cup_qualifying_method"`
-		CupType                      string        `json:"cup_type"`
-		SquadSquadplay               int           `json:"squad_squadplay"`
-		SquadSquadsize               int           `json:"squad_squadsize"`
-		SquadTeamLimit               int           `json:"squad_team_limit"`
-		SquadTotalSpend              int           `json:"squad_total_spend"`
-		UICurrencyMultiplier         int           `json:"ui_currency_multiplier"`
-		UIUseSpecialShirts           bool          `json:"ui_use_special_shirts"`
-		UISpecialShirtExclusions     []interface{} `json:"ui_special_shirt_exclusions"`
-		StatsFormDays                int           `json:"stats_form_days"`
-		SysViceCaptainEnabled        bool          `json:"sys_vice_captain_enabled"`
-		TransfersCap                 int           `json:"transfers_cap"`
-		TransfersSellOnFee           float64       `json:"transfers_sell_on_fee"`
-		LeagueH2HTiebreakStats       []string      `json:"league_h2h_tiebreak_stats"`
-		Timezone                     string        `json:"timezone"`
+	LeagueJoinPublicMax          int           `json:"league_join_public_max"`
+	LeagueMaxSizePublicClassic   int           `json:"league_max_size_public_classic"`
+	LeagueMaxSizePublicH2H       int           `json:"league_max_size_public_h2h"`
+	LeagueMaxSizePrivateH2H      int           `json:"league_max_size_private_h2h"`
+	LeagueMaxKoRoundsPrivateH2H  int           `json:"league_max_ko_rounds_private_h2h"`
+	LeaguePrefixPublic           string        `json:"league_prefix_public"`
+	LeaguePointsH2HWin           int           `json:"league_points_h2h_win"`
+	LeaguePointsH2HLose          int           `json:"league_points_h2h_lose"`
+	LeaguePointsH2HDraw          int           `json:"league_points_h2h_draw"`
+	LeagueKoFirstInsteadOfRandom bool          `json:"league_ko_first_instead_of_random"`
+	CupStartEventID              int           `json:"cup_start_event_id"`
+	CupStopEventID               int           `json:"cup_stop_event_id"`
+	CupQualifyingMethod          string        `json:"cup_qualifying_method"`
+	CupType                      string        `json:"cup_type"`
+	SquadSquadplay               int           `json:"squad_squadplay"`
+	SquadSquadsize               int           `json:"squad_squadsize"`
+	SquadTeamLimit               int           `json:"squad_team_limit"`
+	SquadTotalSpend              int           `json:"squad_total_spend"`
+	UICurrencyMultiplier         int           `json:"ui_currency_multiplier"`
+	UIUseSpecialShirts           bool          `json:"ui_use_special_shirts"`
+	UISpecialShirtExclusions     []interface{} `json:"ui_special_shirt_exclusions"`
+	StatsFormDays                int           `json:"stats_form_days"`
+	SysViceCaptainEnabled        bool          `json:"sys_vice_captain_enabled"`
+	TransfersCap                 int           `json:"transfers_cap"`
+	TransfersSellOnFee           float64       `json:"transfers_sell_on_fee"`
+	LeagueH2HTiebreakStats       []string      `json:"league_h2h_tiebreak_stats"`
+	Timezone                     string        `json:"timezone"`
 }
-type ElementTypesResponse struct  {
+type ElementTypesResponse struct {
 	ID                 int    `json:"id"`
 	PluralName         string `json:"plural_name"`
 	PluralNameShort    string `json:"plural_name_short"`
@@ -361,7 +360,6 @@ type ElementTypesResponse struct  {
 	UIShirtSpecific    bool   `json:"ui_shirt_specific"`
 	SubPositionsLocked []int  `json:"sub_positions_locked"`
 	ElementCount       int    `json:"element_count"`
-
 }
 type Fixture []struct {
 	Code                 int           `json:"code"`
@@ -511,37 +509,37 @@ type Manager struct {
 	SummaryEventRank         int       `json:"summary_event_rank"`
 	CurrentEvent             int       `json:"current_event"`
 	Leagues                  struct {
-	Classic []struct {
-		ID             int         `json:"id"`
-		Name           string      `json:"name"`
-		ShortName      string      `json:"short_name"`
-		Created        time.Time   `json:"created"`
-		Closed         bool        `json:"closed"`
-		Rank           interface{} `json:"rank"`
-		MaxEntries     interface{} `json:"max_entries"`
-		LeagueType     string      `json:"league_type"`
-		Scoring        string      `json:"scoring"`
-		AdminEntry     interface{} `json:"admin_entry"`
-		StartEvent     int         `json:"start_event"`
-		EntryCanLeave  bool        `json:"entry_can_leave"`
-		EntryCanAdmin  bool        `json:"entry_can_admin"`
-		EntryCanInvite bool        `json:"entry_can_invite"`
-		HasCup         bool        `json:"has_cup"`
-		CupLeague      interface{} `json:"cup_league"`
-		CupQualified   interface{} `json:"cup_qualified"`
-		EntryRank      int         `json:"entry_rank"`
-		EntryLastRank  int         `json:"entry_last_rank"`
-	} `json:"classic"`
-	H2H []interface{} `json:"h2h"`
-	Cup struct {
-		Matches []interface{} `json:"matches"`
-		Status  struct {
-			QualificationEvent   int    `json:"qualification_event"`
-			QualificationNumbers int    `json:"qualification_numbers"`
-			QualificationRank    int    `json:"qualification_rank"`
-			QualificationState   string `json:"qualification_state"`
-		} `json:"status"`
-		CupLeague int `json:"cup_league"`
+		Classic []struct {
+			ID             int         `json:"id"`
+			Name           string      `json:"name"`
+			ShortName      string      `json:"short_name"`
+			Created        time.Time   `json:"created"`
+			Closed         bool        `json:"closed"`
+			Rank           interface{} `json:"rank"`
+			MaxEntries     interface{} `json:"max_entries"`
+			LeagueType     string      `json:"league_type"`
+			Scoring        string      `json:"scoring"`
+			AdminEntry     interface{} `json:"admin_entry"`
+			StartEvent     int         `json:"start_event"`
+			EntryCanLeave  bool        `json:"entry_can_leave"`
+			EntryCanAdmin  bool        `json:"entry_can_admin"`
+			EntryCanInvite bool        `json:"entry_can_invite"`
+			HasCup         bool        `json:"has_cup"`
+			CupLeague      interface{} `json:"cup_league"`
+			CupQualified   interface{} `json:"cup_qualified"`
+			EntryRank      int         `json:"entry_rank"`
+			EntryLastRank  int         `json:"entry_last_rank"`
+		} `json:"classic"`
+		H2H []interface{} `json:"h2h"`
+		Cup struct {
+			Matches []interface{} `json:"matches"`
+			Status  struct {
+				QualificationEvent   int    `json:"qualification_event"`
+				QualificationNumbers int    `json:"qualification_numbers"`
+				QualificationRank    int    `json:"qualification_rank"`
+				QualificationState   string `json:"qualification_state"`
+			} `json:"status"`
+			CupLeague int `json:"cup_league"`
 		} `json:"cup"`
 	} `json:"leagues"`
 	Name                       string      `json:"name"`
@@ -550,11 +548,10 @@ type Manager struct {
 	LastDeadlineValue          int         `json:"last_deadline_value"`
 	LastDeadlineTotalTransfers int         `json:"last_deadline_total_transfers"`
 }
-type ManagerResponse struct{
-
+type ManagerResponse struct {
 }
 
-type ManagerLeaguesClassic struct{
+type ManagerLeaguesClassic struct {
 	ID             int         `json:"id"`
 	Name           string      `json:"name"`
 	ShortName      string      `json:"short_name"`
@@ -576,22 +573,18 @@ type ManagerLeaguesClassic struct{
 	EntryLastRank  int         `json:"entry_last_rank"`
 }
 
-type ManagerLeaguesCup struct{
+type ManagerLeaguesCup struct {
 	Matches []interface{} `json:"matches"`
-		Status  struct {
-			QualificationEvent   int    `json:"qualification_event"`
-			QualificationNumbers int    `json:"qualification_numbers"`
-			QualificationRank    int    `json:"qualification_rank"`
-			QualificationState   string `json:"qualification_state"`
-		} `json:"status"`
+	Status  struct {
+		QualificationEvent   int    `json:"qualification_event"`
+		QualificationNumbers int    `json:"qualification_numbers"`
+		QualificationRank    int    `json:"qualification_rank"`
+		QualificationState   string `json:"qualification_state"`
+	} `json:"status"`
 	CupLeague int `json:"cup_league"`
-	 
 }
 
 type ManagerCup struct{}
-
-
-
 
 type Weekly struct {
 	Current []struct {
@@ -659,16 +652,15 @@ type LeagueInfo struct {
 	} `json:"standings"`
 }
 type LeagueResponse struct {
-	Entry 		int 	`json:"entry"` 
-	EntryName   string  `json:"entry_name"`
-	EventTotal 	int 	`json:"event_total"`
-	ID 			int 	`json:"id"`
-	LastRank 	int 	`json:"last_rank"`
-	PlayerName string 	`json:"player_name"`
-	Rank 		int 	`json:"rank"`
-	RankSort 	int 	`json:"rank_sort"`
-	Total 		int 	`json:"total"`
-
+	Entry      int    `json:"entry"`
+	EntryName  string `json:"entry_name"`
+	EventTotal int    `json:"event_total"`
+	ID         int    `json:"id"`
+	LastRank   int    `json:"last_rank"`
+	PlayerName string `json:"player_name"`
+	Rank       int    `json:"rank"`
+	RankSort   int    `json:"rank_sort"`
+	Total      int    `json:"total"`
 }
 type MyTeam struct {
 	Picks []struct {

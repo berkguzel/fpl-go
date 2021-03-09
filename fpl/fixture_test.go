@@ -1,15 +1,14 @@
 package fpl
 
 import (
-	"testing" 
-
+	"testing"
 )
 
-func TestGetFixture( t *testing.T){
+func TestGetFixture(t *testing.T) {
 	c := &Client{}
-	
+
 	got, err := c.GetFixture()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
 	if got == nil {
