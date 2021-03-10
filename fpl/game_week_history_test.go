@@ -6,7 +6,7 @@ import (
 
 func TestListWeeklyPoints(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, _ := c.ListWeeklyPoints(0)
 	if got != nil {
@@ -16,7 +16,7 @@ func TestListWeeklyPoints(t *testing.T) {
 
 func TestListAllWeeks(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListAllWeeks()
 	if err != nil {
@@ -31,11 +31,10 @@ func TestListAllWeeks(t *testing.T) {
 
 func TestListWeeklyPerformance(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, _ := c.ListWeeklyPerformance(-1)
 	if got != nil {
-		t.Errorf("Wanted nil but got: %+v", got)
+		t.Errorf("Expected nil but got: %+v", got)
 	}
-
 }

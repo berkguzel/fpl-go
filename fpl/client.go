@@ -1,37 +1,46 @@
 package fpl
 
 import (
-	"io/ioutil"
 	"net/http"
-	"net/url"
+	"encoding/json"
 )
 
 type Client struct {
-	BaseURL    *url.URL
-	Header     string
-	httpClient http.Client
+	httpClient *http.Client
+	UserAgent string
 }
 
-func (c *Client) Do(method string, url string) ([]byte, error) {
+func (c *Client) NewRequest(method string, path string) (*http.Request, error) {
 
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
+    req, err := http.NewRequest(method, path, nil)
+    if err != nil {
+        return nil, err
+    }
+
+    req.Header.Set("User-Agent", c.UserAgent)
+    return req, nil
+}
+
+func (c *Client) Do(req *http.Request, v interface{}) (*http.Response, error) {
+    resp, err := c.httpClient.Do(req)
+    if err != nil {
+        return nil, err
+    }
+    defer resp.Body.Close()
+    err = json.NewDecoder(resp.Body).Decode(v)
+    return resp, err
+}
+
+func NewClient(httpClient *http.Client) *Client{
+	if httpClient == nil {
+		httpClient = &http.Client{}
 	}
-	req.Header.Set("User-Agent", "")
 
-	client := &c.httpClient
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, err
+	c := &Client{
+		httpClient : httpClient,
+
 	}
 
-	response, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	b := []byte(response)
+	return c
 
-	return b, nil
 }

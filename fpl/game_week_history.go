@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"strconv"
+	
 )
 
 func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error) {
@@ -11,10 +12,16 @@ func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error) {
 	managerID, _ := Get()
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/history/"
 
-	response, _ := c.Do("GET", url)
-
+	
+	response, err := c.NewRequest("GET", url)
+	if err != nil{
+		return nil, err
+	}
+	
 	v := &Weekly{}
-	if err := json.Unmarshal(response, &v); err != nil {
+
+	_, err = c.Do(response, v)
+	if err != nil{
 		return nil, err
 	}
 
@@ -45,18 +52,23 @@ func (c *Client) ListWeeklyPoints(gameWeek int) ([]WeeklyInfo, error) {
 func (c *Client) ListAllWeeks() ([]Weekly, error) {
 
 	managerID, _ := Get()
-
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/history/"
-	response, _ := c.Do("GET", url)
 
-	w := &Weekly{}
-	err := json.Unmarshal(response, &w)
-	if err != nil {
+	response, err := c.NewRequest("GET", url)
+	if err != nil{
+		return nil, err
+	}
+	
+	v := &Weekly{}
+
+	_, err = c.Do(response, v)
+	if err != nil{
 		return nil, err
 	}
 
+
 	var allWeeks []Weekly
-	allWeeks = append(allWeeks, *w)
+	allWeeks = append(allWeeks, *v)
 
 	return allWeeks, nil
 }
@@ -67,16 +79,22 @@ func (c *Client) ListWeeklyPerformance(week int) ([]TeamWeekly, error) {
 	managerID, _ := Get()
 
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/event/" + strconv.Itoa(week) + "/picks/"
-	response, _ := c.Do("GET", url)
 
-	perf := &TeamWeekly{}
-
-	err := json.Unmarshal(response, &perf)
-	if err != nil {
+	response, err := c.NewRequest("GET", url)
+	if err != nil{
 		return nil, err
 	}
-	var perfResponse []TeamWeekly
-	perfResponse = append(perfResponse, *perf)
+	
+	t := &TeamWeekly{}
 
-	return perfResponse, nil
+	_, err = c.Do(response, t)
+	if err != nil{
+		return nil, err
+	}
+
+	var teamweekly []TeamWeekly
+	teamweekly = append(teamweekly, *t)
+
+	
+	return teamweekly, nil
 }

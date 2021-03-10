@@ -6,14 +6,18 @@ import (
 
 func (c *Client) Manager() (*Manager, error) {
 
-	manager := &Manager{}
 	managerID, _ := Get()
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/"
+	
+	manager := &Manager{}
 
-	res, _ := c.Do("GET", url)
-
-	err := json.Unmarshal(res, manager)
-	if err != nil {
+	response, err := c.NewRequest("GET", url)
+	if err != nil{
+		return nil, err
+	}
+	
+	_, err = c.Do(response, manager)
+	if err != nil{
 		return nil, err
 	}
 

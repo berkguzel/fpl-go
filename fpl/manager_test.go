@@ -6,7 +6,7 @@ import (
 
 func TestManager(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.Manager()
 	if err != nil {
@@ -19,7 +19,7 @@ func TestManager(t *testing.T) {
 
 func TestLeagueClassic(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.LeagueClassic()
 	if err != nil {
@@ -32,7 +32,7 @@ func TestLeagueClassic(t *testing.T) {
 
 func TestLeagueCup(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.LeagueCup()
 	if err != nil {

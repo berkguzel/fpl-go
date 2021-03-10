@@ -6,8 +6,7 @@ import (
 
 func TestGetGeneral(t *testing.T) {
 
-	c := &Client{}
-
+	c := NewClient(nil)
 	got, err := c.GetGeneral()
 	if err != nil {
 		t.Fatal(err)
@@ -20,7 +19,7 @@ func TestGetGeneral(t *testing.T) {
 
 func TestListTeamInfo(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListTeamInfo()
 	if err != nil {
@@ -34,7 +33,7 @@ func TestListTeamInfo(t *testing.T) {
 
 func TestListEventInfo(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListEventInfo()
 	if err != nil {
@@ -48,7 +47,7 @@ func TestListEventInfo(t *testing.T) {
 
 func TestListPhasesInfo(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListEventInfo()
 	if err != nil {
@@ -62,7 +61,7 @@ func TestListPhasesInfo(t *testing.T) {
 
 func TestListElementsInfo(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListElementsInfo()
 	if err != nil {
@@ -76,7 +75,7 @@ func TestListElementsInfo(t *testing.T) {
 
 func TestListElementStatsInfo(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListElementStatsInfo()
 	if err != nil {
@@ -90,7 +89,7 @@ func TestListElementStatsInfo(t *testing.T) {
 
 func TestListElementTypesInfo(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListElementTypesInfo()
 	if err != nil {
@@ -104,7 +103,7 @@ func TestListElementTypesInfo(t *testing.T) {
 
 func TestListGameSettings(t *testing.T) {
 
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.ListGameSettings()
 	if err != nil {

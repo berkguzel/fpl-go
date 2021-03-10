@@ -5,7 +5,7 @@ import (
 )
 
 func TestGetFixture(t *testing.T) {
-	c := &Client{}
+	c := NewClient(nil)
 
 	got, err := c.GetFixture()
 	if err != nil {

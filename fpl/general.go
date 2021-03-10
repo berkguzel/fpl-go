@@ -8,10 +8,14 @@ func (c *Client) GetGeneral() (*General, error) {
 
 	url := "https://fantasy.premierleague.com/api/bootstrap-static/"
 
-	response, _ := c.Do("GET", url)
+	response, err := c.NewRequest("GET", url)
+	if err != nil{
+		return nil, err
+	}
 	general := &General{}
 
-	if err := json.Unmarshal(response, &general); err != nil {
+	_ ,err = c.Do(response, general)
+	if err != nil{
 		return nil, err
 	}
 

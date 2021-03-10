@@ -651,7 +651,8 @@ type LeagueInfo struct {
 		Results []interface{} `json:"results"`
 	} `json:"standings"`
 }
-type LeagueResponse struct {
+
+type StandingsResponse struct {
 	Entry      int    `json:"entry"`
 	EntryName  string `json:"entry_name"`
 	EventTotal int    `json:"event_total"`
@@ -661,6 +662,18 @@ type LeagueResponse struct {
 	Rank       int    `json:"rank"`
 	RankSort   int    `json:"rank_sort"`
 	Total      int    `json:"total"`
+}
+type NewEntriesResponse struct {
+	HasNext bool `json:"has_next"`
+		Page    int  `json:"page"`
+		Results []struct {
+			Entry           int       `json:"entry"`
+			EntryName       string    `json:"entry_name"`
+			JoinedTime      time.Time `json:"joined_time"`
+			PlayerFirstName string    `json:"player_first_name"`
+			PlayerLastName  string    `json:"player_last_name"`
+		} `json:"results"`
+
 }
 type MyTeam struct {
 	Picks []struct {
