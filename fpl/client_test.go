@@ -19,7 +19,7 @@ func TestDo(t *testing.T) {
 	c := NewClient(nil)
 
 	response, err := c.NewRequest("GET", "https://fantasy.premierleague.com/api")
-	if err != nil{
+	if err != nil {
 		t.Error(err)
 	}
 

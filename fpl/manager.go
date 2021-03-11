@@ -4,29 +4,28 @@ import (
 	"encoding/json"
 )
 
-func (c *Client) Manager() (*Manager, error) {
+func (c *Client) Manager(managerID string) (*Manager, error) {
 
-	managerID, _ := Get()
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/"
-	
+
 	manager := &Manager{}
 
 	response, err := c.NewRequest("GET", url)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	_, err = c.Do(response, manager)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 
 	return manager, nil
 }
 
-func (c *Client) LeagueClassic() ([]ManagerLeaguesClassic, error) {
+func (c *Client) LeagueClassic(managerID string) ([]ManagerLeaguesClassic, error) {
 
-	manager, err := c.Manager()
+	manager, err := c.Manager(managerID)
 	if err != nil {
 		return nil, err
 	}
@@ -45,9 +44,9 @@ func (c *Client) LeagueClassic() ([]ManagerLeaguesClassic, error) {
 	return classic, nil
 }
 
-func (c *Client) LeagueCup() ([]ManagerLeaguesCup, error) {
+func (c *Client) LeagueCup(managerID string) ([]ManagerLeaguesCup, error) {
 
-	manager, err := c.Manager()
+	manager, err := c.Manager(managerID)
 	if err != nil {
 		return nil, err
 	}

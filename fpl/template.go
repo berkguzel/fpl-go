@@ -456,7 +456,81 @@ type Player struct {
 		IctIndex        string `json:"ict_index"`
 	} `json:"history_past"`
 }
+type PlayerFixture struct {
+	ID                   int         `json:"id"`
+	Code                 int         `json:"code"`
+	TeamH                int         `json:"team_h"`
+	TeamHScore           interface{} `json:"team_h_score"`
+	TeamA                int         `json:"team_a"`
+	TeamAScore           interface{} `json:"team_a_score"`
+	Event                int         `json:"event"`
+	Finished             bool        `json:"finished"`
+	Minutes              int         `json:"minutes"`
+	ProvisionalStartTime bool        `json:"provisional_start_time"`
+	KickoffTime          string      `json:"kickoff_time"`
+	EventName            string      `json:"event_name"`
+	IsHome               bool        `json:"is_home"`
+	Difficulty           int         `json:"difficulty"`
+}
 
+type PlayerHistory struct {
+	Element          int       `json:"element"`
+	Fixture          int       `json:"fixture"`
+	OpponentTeam     int       `json:"opponent_team"`
+	TotalPoints      int       `json:"total_points"`
+	WasHome          bool      `json:"was_home"`
+	KickoffTime      time.Time `json:"kickoff_time"`
+	TeamHScore       int       `json:"team_h_score"`
+	TeamAScore       int       `json:"team_a_score"`
+	Round            int       `json:"round"`
+	Minutes          int       `json:"minutes"`
+	GoalsScored      int       `json:"goals_scored"`
+	Assists          int       `json:"assists"`
+	CleanSheets      int       `json:"clean_sheets"`
+	GoalsConceded    int       `json:"goals_conceded"`
+	OwnGoals         int       `json:"own_goals"`
+	PenaltiesSaved   int       `json:"penalties_saved"`
+	PenaltiesMissed  int       `json:"penalties_missed"`
+	YellowCards      int       `json:"yellow_cards"`
+	RedCards         int       `json:"red_cards"`
+	Saves            int       `json:"saves"`
+	Bonus            int       `json:"bonus"`
+	Bps              int       `json:"bps"`
+	Influence        string    `json:"influence"`
+	Creativity       string    `json:"creativity"`
+	Threat           string    `json:"threat"`
+	IctIndex         string    `json:"ict_index"`
+	Value            int       `json:"value"`
+	TransfersBalance int       `json:"transfers_balance"`
+	Selected         int       `json:"selected"`
+	TransfersIn      int       `json:"transfers_in"`
+	TransfersOut     int       `json:"transfers_out"`
+}
+
+type PlayerHistoryPast struct {
+	SeasonName      string `json:"season_name"`
+	ElementCode     int    `json:"element_code"`
+	StartCost       int    `json:"start_cost"`
+	EndCost         int    `json:"end_cost"`
+	TotalPoints     int    `json:"total_points"`
+	Minutes         int    `json:"minutes"`
+	GoalsScored     int    `json:"goals_scored"`
+	Assists         int    `json:"assists"`
+	CleanSheets     int    `json:"clean_sheets"`
+	GoalsConceded   int    `json:"goals_conceded"`
+	OwnGoals        int    `json:"own_goals"`
+	PenaltiesSaved  int    `json:"penalties_saved"`
+	PenaltiesMissed int    `json:"penalties_missed"`
+	YellowCards     int    `json:"yellow_cards"`
+	RedCards        int    `json:"red_cards"`
+	Saves           int    `json:"saves"`
+	Bonus           int    `json:"bonus"`
+	Bps             int    `json:"bps"`
+	Influence       string `json:"influence"`
+	Creativity      string `json:"creativity"`
+	Threat          string `json:"threat"`
+	IctIndex        string `json:"ict_index"`
+}
 type GameWeek struct {
 	Elements []struct {
 		ID    int `json:"id"`
@@ -665,15 +739,14 @@ type StandingsResponse struct {
 }
 type NewEntriesResponse struct {
 	HasNext bool `json:"has_next"`
-		Page    int  `json:"page"`
-		Results []struct {
-			Entry           int       `json:"entry"`
-			EntryName       string    `json:"entry_name"`
-			JoinedTime      time.Time `json:"joined_time"`
-			PlayerFirstName string    `json:"player_first_name"`
-			PlayerLastName  string    `json:"player_last_name"`
-		} `json:"results"`
-
+	Page    int  `json:"page"`
+	Results []struct {
+		Entry           int       `json:"entry"`
+		EntryName       string    `json:"entry_name"`
+		JoinedTime      time.Time `json:"joined_time"`
+		PlayerFirstName string    `json:"player_first_name"`
+		PlayerLastName  string    `json:"player_last_name"`
+	} `json:"results"`
 }
 type MyTeam struct {
 	Picks []struct {

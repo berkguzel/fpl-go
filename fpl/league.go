@@ -2,37 +2,31 @@ package fpl
 
 import (
 	"encoding/json"
-
-
 )
 
-
-func (c *Client) League() (*LeagueInfo, error) {
-
-	_, leagueID := Get()
+func (c *Client) League(leagueID string) (*LeagueInfo, error) {
 
 	url := "https://fantasy.premierleague.com/api/leagues-classic/" + leagueID + "/standings/"
 
-
 	response, err := c.NewRequest("GET", url)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	l := &LeagueInfo{}
 
 	_, err = c.Do(response, l)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 
 	return l, nil
 }
 
-func (c *Client) GetStandings()([]StandingsResponse, error){
+func (c *Client) GetStandings(leagueID string) ([]StandingsResponse, error) {
 
-	s, err := c.League()
-	if err != nil{
+	s, err := c.League(leagueID)
+	if err != nil {
 		return nil, err
 	}
 
@@ -43,7 +37,7 @@ func (c *Client) GetStandings()([]StandingsResponse, error){
 
 	for _, v := range standings {
 		resp, _ := json.Marshal(v)
-		if err = json.Unmarshal(resp, &l); err != nil{
+		if err = json.Unmarshal(resp, &l); err != nil {
 			return nil, err
 		}
 		league = append(league, *l)
@@ -54,23 +48,23 @@ func (c *Client) GetStandings()([]StandingsResponse, error){
 
 }
 
-func (c *Client) GetNewEntries() ([]NewEntriesResponse, error){
+func (c *Client) GetNewEntries(leagueID string) ([]NewEntriesResponse, error) {
 
-	s, err := c.League()
-	if err != nil{
+	s, err := c.League(leagueID)
+	if err != nil {
 		return nil, err
 	}
 
 	newEntries := s.NewEntries
 
 	ent, err := json.Marshal(newEntries)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 
-	e := &NewEntriesResponse{} 
+	e := &NewEntriesResponse{}
 	var newEntriesResponse []NewEntriesResponse
-	if err := json.Unmarshal(ent, &e); err !=nil{
+	if err := json.Unmarshal(ent, &e); err != nil {
 		return nil, err
 	}
 	newEntriesResponse = append(newEntriesResponse, *e)

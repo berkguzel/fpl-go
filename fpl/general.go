@@ -9,13 +9,13 @@ func (c *Client) GetGeneral() (*General, error) {
 	url := "https://fantasy.premierleague.com/api/bootstrap-static/"
 
 	response, err := c.NewRequest("GET", url)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	general := &General{}
 
-	_ ,err = c.Do(response, general)
-	if err != nil{
+	_, err = c.Do(response, general)
+	if err != nil {
 		return nil, err
 	}
 

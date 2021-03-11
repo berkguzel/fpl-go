@@ -9,14 +9,14 @@ func (c *Client) GetFixture() (*Fixture, error) {
 	fixture := &Fixture{}
 
 	response, err := c.NewRequest("GET", fixtureAddress)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	_, err = c.Do(response, fixture)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	
+
 	return fixture, nil
 }

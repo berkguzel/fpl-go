@@ -8,9 +8,9 @@ func TestListWeeklyPoints(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, _ := c.ListWeeklyPoints(0)
+	got, _ := c.ListWeeklyPoints(0, "")
 	if got != nil {
-		t.Errorf("Wanted nil but got: %+v", got)
+		t.Errorf("Got: %+v", got)
 	}
 }
 
@@ -18,13 +18,9 @@ func TestListAllWeeks(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.ListAllWeeks()
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if got == nil {
-		t.Errorf("Could do not be succeed, Got: %+v", got)
+	got, _ := c.ListAllWeeks("")
+	if got != nil {
+		t.Errorf("Got: %+v", got)
 	}
 
 }
@@ -33,8 +29,8 @@ func TestListWeeklyPerformance(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, _ := c.ListWeeklyPerformance(-1)
+	got, _ := c.ListWeeklyPerformance(-1, "")
 	if got != nil {
-		t.Errorf("Expected nil but got: %+v", got)
+		t.Errorf("Got: %+v", got)
 	}
 }
