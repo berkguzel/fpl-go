@@ -8,7 +8,7 @@ func TestListTransfers(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.ListTransfers("7270639")
+	got, err := c.ListTransfers("")
 	if err != nil {
 		t.Error(err)
 	}
