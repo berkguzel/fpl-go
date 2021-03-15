@@ -22,7 +22,8 @@ func (c *Client) GetGeneral() (*General, error) {
 	return general, nil
 }
 
-func (c *Client) ListTeamInfo() ([]TeamResponse, error) {
+// information of current EPL clubs
+func (c *Client) ListClubsInfo() ([]TeamResponse, error) {
 
 	general, _ := c.GetGeneral()
 
@@ -40,6 +41,7 @@ func (c *Client) ListTeamInfo() ([]TeamResponse, error) {
 	return t, nil
 }
 
+// informations of game weeks
 func (c *Client) ListEventInfo() ([]EventsResponse, error) {
 
 	general, _ := c.GetGeneral()
@@ -59,6 +61,7 @@ func (c *Client) ListEventInfo() ([]EventsResponse, error) {
 
 }
 
+// phases of EPL season
 func (c *Client) ListPhasesInfo() ([]PhasesResponse, error) {
 
 	general, _ := c.GetGeneral()
@@ -78,13 +81,14 @@ func (c *Client) ListPhasesInfo() ([]PhasesResponse, error) {
 
 }
 
-func (c *Client) ListElementsInfo() ([]ElementsResponse, error) {
+// element stats
+func (c *Client) ListElementStatsInfo() ([]ElementStatsResponse, error) {
 
 	general, _ := c.GetGeneral()
 
-	var e []ElementsResponse
+	var e []ElementStatsResponse
 
-	m, err := json.Marshal(general.Elements)
+	m, err := json.Marshal(general.ElementStats)
 	if err != nil {
 		return nil, err
 	}
@@ -97,44 +101,27 @@ func (c *Client) ListElementsInfo() ([]ElementsResponse, error) {
 
 }
 
-func (c *Client) ListElementStatsInfo() ([]ElementStatsResponse, error) {
-
-	general, _ := c.GetGeneral()
-
-	var es []ElementStatsResponse
-
-	m, err := json.Marshal(general.ElementStats)
-	if err != nil {
-		return nil, err
-	}
-
-	if err := json.Unmarshal(m, &es); err != nil {
-		return nil, err
-	}
-
-	return es, nil
-
-}
-
+// element types(positions)
 func (c *Client) ListElementTypesInfo() ([]ElementTypesResponse, error) {
 
 	general, _ := c.GetGeneral()
 
-	var et []ElementTypesResponse
+	var e []ElementTypesResponse
 
 	m, err := json.Marshal(general.ElementTypes)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := json.Unmarshal(m, &et); err != nil {
+	if err := json.Unmarshal(m, &e); err != nil {
 		return nil, err
 	}
 
-	return et, nil
+	return e, nil
 
 }
 
+// game settings
 func (c *Client) ListGameSettings() ([]GameSettingsResponse, error) {
 
 	general, _ := c.GetGeneral()

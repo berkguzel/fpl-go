@@ -6,6 +6,7 @@ import (
 	"strconv"
 )
 
+// points of the manager by given game week
 func (c *Client) ListWeeklyPoints(gameWeek int, managerID string) ([]WeeklyInfo, error) {
 
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/history/"
@@ -45,7 +46,7 @@ func (c *Client) ListWeeklyPoints(gameWeek int, managerID string) ([]WeeklyInfo,
 	return nil, errors.New("Could not find game week")
 }
 
-// List all weeks
+// points of the manager for all game weeks
 func (c *Client) ListAllWeeks(managerID string) ([]Weekly, error) {
 
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/history/"
@@ -68,10 +69,10 @@ func (c *Client) ListAllWeeks(managerID string) ([]Weekly, error) {
 	return allWeeks, nil
 }
 
-// individual performances of players weekly
-func (c *Client) ListWeeklyPerformance(week int, managerID string) ([]TeamWeekly, error) {
+// individual performances of players by given game week
+func (c *Client) ListWeeklyPerformance(gameWeek int, managerID string) ([]TeamWeekly, error) {
 
-	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/event/" + strconv.Itoa(week) + "/picks/"
+	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/event/" + strconv.Itoa(gameWeek) + "/picks/"
 
 	response, err := c.NewRequest("GET", url)
 	if err != nil {

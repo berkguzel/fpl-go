@@ -243,7 +243,7 @@ type PhasesResponse struct {
 	StopEvent  int    `json:"stop_event"`
 }
 
-type ElementsResponse struct {
+type PlayerDeailtedInfo struct {
 	ChanceOfPlayingNextRound         int         `json:"chance_of_playing_next_round"`
 	ChanceOfPlayingThisRound         int         `json:"chance_of_playing_this_round"`
 	Code                             int         `json:"code"`

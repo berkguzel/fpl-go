@@ -11,6 +11,7 @@ func TestGetFixture(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	if got == nil {
 		t.Errorf("GOT: %+v, Could not find fixture", got)
 	}

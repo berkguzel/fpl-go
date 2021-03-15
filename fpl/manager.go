@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 )
 
+// information about manager
 func (c *Client) Manager(managerID string) (*Manager, error) {
 
 	url := "https://fantasy.premierleague.com/api/entry/" + managerID + "/"
@@ -23,6 +24,7 @@ func (c *Client) Manager(managerID string) (*Manager, error) {
 	return manager, nil
 }
 
+// information about classic leagues the manager joined
 func (c *Client) LeagueClassic(managerID string) ([]ManagerLeaguesClassic, error) {
 
 	manager, err := c.Manager(managerID)
@@ -44,6 +46,7 @@ func (c *Client) LeagueClassic(managerID string) ([]ManagerLeaguesClassic, error
 	return classic, nil
 }
 
+// information about cups the manager joined
 func (c *Client) LeagueCup(managerID string) ([]ManagerLeaguesCup, error) {
 
 	manager, err := c.Manager(managerID)

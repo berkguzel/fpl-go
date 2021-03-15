@@ -21,10 +21,11 @@ func TestListTeamInfo(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.ListTeamInfo()
+	got, err := c.ListClubsInfo()
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	if got == nil {
 		t.Errorf("Could do not be succeed, Got: %+v", got)
 	}
@@ -50,20 +51,6 @@ func TestListPhasesInfo(t *testing.T) {
 	c := NewClient(nil)
 
 	got, err := c.ListEventInfo()
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if got == nil {
-		t.Errorf("Could do not be succeed, Got: %+v", got)
-	}
-}
-
-func TestListElementsInfo(t *testing.T) {
-
-	c := NewClient(nil)
-
-	got, err := c.ListElementsInfo()
 	if err != nil {
 		t.Fatal(err)
 	}

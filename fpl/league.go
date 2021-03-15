@@ -2,8 +2,10 @@ package fpl
 
 import (
 	"encoding/json"
+	"errors"
 )
 
+// league endpoint according to given league id
 func (c *Client) League(leagueID string) (*LeagueInfo, error) {
 
 	url := "https://fantasy.premierleague.com/api/leagues-classic/" + leagueID + "/standings/"
@@ -23,6 +25,7 @@ func (c *Client) League(leagueID string) (*LeagueInfo, error) {
 	return l, nil
 }
 
+// standings according to given league id
 func (c *Client) GetStandings(leagueID string) ([]StandingsResponse, error) {
 
 	s, err := c.League(leagueID)
@@ -48,6 +51,7 @@ func (c *Client) GetStandings(leagueID string) ([]StandingsResponse, error) {
 
 }
 
+// new entries of the league
 func (c *Client) GetNewEntries(leagueID string) ([]NewEntriesResponse, error) {
 
 	s, err := c.League(leagueID)
@@ -70,4 +74,21 @@ func (c *Client) GetNewEntries(leagueID string) ([]NewEntriesResponse, error) {
 	newEntriesResponse = append(newEntriesResponse, *e)
 
 	return newEntriesResponse, nil
+}
+
+// information about the team according to league
+func (c *Client) GetTeamInLeague(leagueID string, teamName string) (*StandingsResponse, error) {
+
+	league, err := c.GetStandings(leagueID)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, v := range league {
+		if v.EntryName == teamName {
+			return &v, nil
+		}
+	}
+
+	return nil, errors.New("Could not find team in league")
 }

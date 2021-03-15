@@ -2,9 +2,11 @@ package fpl
 
 import (
 	"encoding/json"
+	"errors"
 	"strconv"
 )
 
+// all information of football player
 func (c *Client) GetPlayer(playerID int) (*Player, error) {
 
 	id := strconv.Itoa(playerID)
@@ -25,6 +27,7 @@ func (c *Client) GetPlayer(playerID int) (*Player, error) {
 	return player, nil
 }
 
+// football player's informations for next fixtures
 func (c *Client) PlayerFixture(playerID int) ([]PlayerFixture, error) {
 
 	player, err := c.GetPlayer(playerID)
@@ -45,6 +48,7 @@ func (c *Client) PlayerFixture(playerID int) ([]PlayerFixture, error) {
 	return playerFixture, nil
 }
 
+// football player's informations for previous fixtures
 func (c *Client) PlayerHistory(playerID int) ([]PlayerHistory, error) {
 
 	player, err := c.GetPlayer(playerID)
@@ -65,7 +69,8 @@ func (c *Client) PlayerHistory(playerID int) ([]PlayerHistory, error) {
 	return playerHistory, nil
 }
 
-func (c *Client) PlayerHistoryPast(playerID int) ([]PlayerHistory, error) {
+// football player's informations for previous seasons
+func (c *Client) PlayerHistoryPast(playerID int) ([]PlayerHistoryPast, error) {
 
 	player, err := c.GetPlayer(playerID)
 	if err != nil {
@@ -77,10 +82,48 @@ func (c *Client) PlayerHistoryPast(playerID int) ([]PlayerHistory, error) {
 		return nil, err
 	}
 
-	var playerHistory []PlayerHistory
-	if err := json.Unmarshal(pf, &playerHistory); err != nil {
+	var playerHistoryPast []PlayerHistoryPast
+	if err := json.Unmarshal(pf, &playerHistoryPast); err != nil {
 		return nil, err
 	}
 
-	return playerHistory, nil
+	return playerHistoryPast, nil
+}
+
+// learn code of player
+func (c *Client) GetCodeOfPlayer(name string) (int, error) {
+
+	players, err := c.InfoOfPlayers()
+	if err != nil {
+		return 0, err
+	}
+
+	for _, v := range players {
+		if v.FirstName == name {
+			return v.ID, nil
+		}
+	}
+
+	return 0, errors.New("Could not find footballer")
+
+}
+
+// detailed informations of footballers
+func (c *Client) InfoOfPlayers() ([]PlayerDeailtedInfo, error) {
+
+	general, _ := c.GetGeneral()
+
+	var e []PlayerDeailtedInfo
+
+	m, err := json.Marshal(general.Elements)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(m, &e); err != nil {
+		return nil, err
+	}
+
+	return e, nil
+
 }
