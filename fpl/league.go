@@ -6,7 +6,7 @@ import (
 )
 
 // league endpoint according to given league id
-func (c *Client) League(leagueID string) (*LeagueInfo, error) {
+func (c *Client) GetLeague(leagueID string) (*LeagueInfo, error) {
 
 	url := "https://fantasy.premierleague.com/api/leagues-classic/" + leagueID + "/standings/"
 
@@ -28,7 +28,7 @@ func (c *Client) League(leagueID string) (*LeagueInfo, error) {
 // standings according to given league id
 func (c *Client) GetStandings(leagueID string) ([]StandingsResponse, error) {
 
-	s, err := c.League(leagueID)
+	s, err := c.GetLeague(leagueID)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (c *Client) GetStandings(leagueID string) ([]StandingsResponse, error) {
 // new entries of the league
 func (c *Client) GetNewEntries(leagueID string) ([]NewEntriesResponse, error) {
 
-	s, err := c.League(leagueID)
+	s, err := c.GetLeague(leagueID)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (c *Client) GetNewEntries(leagueID string) ([]NewEntriesResponse, error) {
 }
 
 // information about the team according to league
-func (c *Client) GetTeamInLeague(leagueID string, teamName string) (*StandingsResponse, error) {
+func (c *Client) GetTeamInfoInLeague(leagueID string, teamName string) (*StandingsResponse, error) {
 
 	league, err := c.GetStandings(leagueID)
 	if err != nil {

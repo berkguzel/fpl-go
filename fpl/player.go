@@ -28,7 +28,7 @@ func (c *Client) GetPlayer(playerID int) (*Player, error) {
 }
 
 // football player's informations for next fixtures
-func (c *Client) PlayerFixture(playerID int) ([]PlayerFixture, error) {
+func (c *Client) ListPlayerFixture(playerID int) ([]PlayerFixture, error) {
 
 	player, err := c.GetPlayer(playerID)
 	if err != nil {
@@ -49,7 +49,7 @@ func (c *Client) PlayerFixture(playerID int) ([]PlayerFixture, error) {
 }
 
 // football player's informations for previous fixtures
-func (c *Client) PlayerHistory(playerID int) ([]PlayerHistory, error) {
+func (c *Client) ListPlayerHistory(playerID int) ([]PlayerHistory, error) {
 
 	player, err := c.GetPlayer(playerID)
 	if err != nil {
@@ -70,7 +70,7 @@ func (c *Client) PlayerHistory(playerID int) ([]PlayerHistory, error) {
 }
 
 // football player's informations for previous seasons
-func (c *Client) PlayerHistoryPast(playerID int) ([]PlayerHistoryPast, error) {
+func (c *Client) ListPlayerHistoryPast(playerID int) ([]PlayerHistoryPast, error) {
 
 	player, err := c.GetPlayer(playerID)
 	if err != nil {
@@ -93,7 +93,7 @@ func (c *Client) PlayerHistoryPast(playerID int) ([]PlayerHistoryPast, error) {
 // learn code of player
 func (c *Client) GetCodeOfPlayer(name string) (int, error) {
 
-	players, err := c.InfoOfPlayers()
+	players, err := c.GetInfoOfPlayers()
 	if err != nil {
 		return 0, err
 	}
@@ -109,7 +109,7 @@ func (c *Client) GetCodeOfPlayer(name string) (int, error) {
 }
 
 // detailed informations of footballers
-func (c *Client) InfoOfPlayers() ([]PlayerDeailtedInfo, error) {
+func (c *Client) GetInfoOfPlayers() ([]PlayerDeailtedInfo, error) {
 
 	general, _ := c.GetGeneral()
 

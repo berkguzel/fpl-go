@@ -23,7 +23,7 @@ func TestPlayerFixture(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.PlayerFixture(1)
+	got, err := c.ListPlayerFixture(1)
 	if err != nil {
 		t.Errorf("Could not access to data")
 	}
@@ -38,7 +38,7 @@ func TestPlayerHistory(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.PlayerHistory(1)
+	got, err := c.ListPlayerHistory(1)
 	if err != nil {
 		t.Errorf("Could not access to data")
 	}
@@ -53,7 +53,7 @@ func TestPlayerHistoryPast(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.PlayerHistoryPast(1)
+	got, err := c.ListPlayerHistoryPast(1)
 	if err != nil {
 		t.Errorf("Could not access to data")
 	}
@@ -81,7 +81,7 @@ func InfoOfPlayers(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.InfoOfPlayers()
+	got, err := c.GetInfoOfPlayers()
 	if err != nil {
 		t.Fatal(err)
 	}

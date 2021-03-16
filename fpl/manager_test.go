@@ -8,7 +8,7 @@ func TestManager(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, _ := c.Manager("")
+	got, _ := c.GetManager("")
 	if got != nil {
 		t.Errorf("Got: %+v", got)
 	}

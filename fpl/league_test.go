@@ -8,7 +8,7 @@ func TestLeague(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, _ := c.League("")
+	got, _ := c.GetLeague("")
 	if got != nil {
 		t.Errorf("Got: %+v", got)
 	}
@@ -41,7 +41,7 @@ func TestGetTeamInLeague(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, _ := c.GetTeamInLeague("", "")
+	got, _ := c.GetTeamInfoInLeague("", "")
 	if got != nil {
 		t.Errorf("Got: %+v", got)
 	}
