@@ -26,3 +26,13 @@ func main(){
 
 
 ```
+# FEATURES
+- Standings
+- Manager specific information
+- Fixture
+- Player specific information
+- Weekly events
+
+
+
+#### You can find an idea about how to use this client in this [repo](github.com/berkguzel/fpl-discord-bot).
