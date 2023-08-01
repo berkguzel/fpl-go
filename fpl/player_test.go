@@ -68,7 +68,7 @@ func TestGetCodeOfPlayer(t *testing.T) {
 
 	c := NewClient(nil)
 
-	got, err := c.GetCodeOfPlayer("Kane")
+	got, err := c.GetCodeOfPlayer("Harry")
 	if err != nil {
 		t.Error(err)
 	}
