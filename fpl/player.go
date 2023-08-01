@@ -109,11 +109,11 @@ func (c *Client) GetCodeOfPlayer(name string) (int, error) {
 }
 
 // detailed informations of footballers
-func (c *Client) GetInfoOfPlayers() ([]PlayerDeailtedInfo, error) {
+func (c *Client) GetInfoOfPlayers() ([]PlayerDetailedInfo, error) {
 
 	general, _ := c.GetGeneral()
 
-	var e []PlayerDeailtedInfo
+	var e []PlayerDetailedInfo
 
 	m, err := json.Marshal(general.Elements)
 	if err != nil {
