@@ -39,10 +39,10 @@ func main(){
 - League
     - Standings
     - New entries
-    - Team info
+    - Team info  
 - Manager specific information
     - Points of the manager for all game weeks
-    - Info about the clssic leagues and cups
+    - Info about the clssic leagues and cups  
 - Fixture
     - General fixture
     - Weekly fixture
@@ -50,7 +50,7 @@ func main(){
 	- Code of player in FPL
 	- Next fixtures
 	- Information for previous seasons and next fixtures
-	- Detailed info 
+	- Detailed info
 - Weekly events
     - Points of the manager and player for game weeks
     - Info about FPL players by week
